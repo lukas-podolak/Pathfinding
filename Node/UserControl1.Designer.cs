@@ -1,7 +1,6 @@
-﻿
-namespace Pathfinding
+﻿namespace Node
 {
-    partial class Form1
+    partial class UserControl1
     {
         /// <summary>
         /// Vyžaduje se proměnná návrháře.
@@ -21,7 +20,7 @@ namespace Pathfinding
             base.Dispose(disposing);
         }
 
-        #region Kód generovaný Návrhářem Windows Form
+        #region Kód vygenerovaný pomocí Návrháře komponent
 
         /// <summary>
         /// Metoda vyžadovaná pro podporu Návrháře - neupravovat
@@ -29,22 +28,11 @@ namespace Pathfinding
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.SuspendLayout();
-            // 
-            // Form1
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 712);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Form1";
-            this.Text = "Pathfinding";
-            this.ResumeLayout(false);
-
+            this.ClientSize = new System.Drawing.Size(800, 450);
         }
 
         #endregion
     }
 }
-
