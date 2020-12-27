@@ -75,14 +75,15 @@
             this.Controls.Add(this.lblG);
             this.Name = "UserControl1";
             this.Size = new System.Drawing.Size(100, 100);
+            this.SizeChanged += new System.EventHandler(this.UserControl1_SizeChanged);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label lblG;
-        private System.Windows.Forms.Label lblH;
-        private System.Windows.Forms.Label lblF;
+        public System.Windows.Forms.Label lblG;
+        public System.Windows.Forms.Label lblH;
+        public System.Windows.Forms.Label lblF;
     }
 }
