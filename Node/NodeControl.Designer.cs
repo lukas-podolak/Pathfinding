@@ -66,14 +66,14 @@
             this.lblF.Text = "F";
             this.lblF.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // UserControl1
+            // NodeControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.lblF);
             this.Controls.Add(this.lblH);
             this.Controls.Add(this.lblG);
-            this.Name = "UserControl1";
+            this.Name = "NodeControl";
             this.Size = new System.Drawing.Size(100, 100);
             this.SizeChanged += new System.EventHandler(this.UserControl1_SizeChanged);
             this.ResumeLayout(false);

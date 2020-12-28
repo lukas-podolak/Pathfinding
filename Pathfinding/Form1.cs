@@ -13,7 +13,8 @@ namespace Pathfinding
 {
     public partial class Form1 : Form
     {
-        public Node.NodeControl[,] nodeInArea;
+        //public Node.NodeControl[,] nodeInArea;
+        public Label[,] nodeInArea;
 
         private int areaSize = 20;
         private int width = 0;
@@ -32,21 +33,32 @@ namespace Pathfinding
         // Vygeneruje pole
         public void GenerateArea(int size)
         {
-            nodeInArea = new Node.NodeControl[size, size];
+            //nodeInArea = new Node.NodeControl[size, size];
+            nodeInArea = new Label[size, size];
 
             for (int x = 0; x < size; x++)
             {
                 for (int y = 0; y < size; y++)
                 {
-                    nodeInArea[x, y] = new Node.NodeControl();
+                    //nodeInArea[x, y] = new Node.NodeControl();
+                    nodeInArea[x, y] = new Label();
                     nodeInArea[x, y].Width = width / size;
                     nodeInArea[x, y].Height = height / size;
                     nodeInArea[x, y].Top = (y * (height / size + 1)) + 1;
                     nodeInArea[x, y].Left = (x * (width / size + 1)) + 1;
                     nodeInArea[x, y].BackColor = Color.White;
-                    nodeInArea[x, y].lblF.Text = "";
+                    /*nodeInArea[x, y].lblF.Text = "";
                     nodeInArea[x, y].lblG.Text = "";
                     nodeInArea[x, y].lblH.Text = "";
+                    nodeInArea[x, y].lblF.MouseDown += Form1_MouseDown;
+                    nodeInArea[x, y].lblF.MouseMove += Form1_MouseMove;
+                    nodeInArea[x, y].lblF.MouseUp += Form1_MouseUp;
+                    nodeInArea[x, y].lblH.MouseDown += Form1_MouseDown;
+                    nodeInArea[x, y].lblH.MouseMove += Form1_MouseMove;
+                    nodeInArea[x, y].lblH.MouseUp += Form1_MouseUp;
+                    nodeInArea[x, y].lblG.MouseDown += Form1_MouseDown;
+                    nodeInArea[x, y].lblG.MouseMove += Form1_MouseMove;
+                    nodeInArea[x, y].lblG.MouseUp += Form1_MouseUp;*/
                     nodeInArea[x, y].MouseDown += Form1_MouseDown;
                     nodeInArea[x, y].MouseMove += Form1_MouseMove;
                     nodeInArea[x, y].MouseUp += Form1_MouseUp;
@@ -56,6 +68,7 @@ namespace Pathfinding
         }
 
         bool mouseIsDown = false;
+        float koeficient = 0.6f;
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -127,6 +140,9 @@ namespace Pathfinding
         {
             if (mouseIsDown == true)
             {
+                //int y = (int)(e.Y / (areaSize * koeficient));
+                //int x = (int)(e.X / (areaSize * koeficient));
+
                 int x = (e.X - 1 + (sender as Label).Left) / (width / areaSize + 1);
                 int y = (e.Y - 1 + (sender as Label).Top) / (height / areaSize + 1);
 

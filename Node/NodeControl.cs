@@ -12,11 +12,15 @@ namespace Node
 {
     public partial class NodeControl: UserControl
     {
+        public int x = 0;
+        public int y = 0;
+
         public NodeControl()
         {
             InitializeComponent();
 
             ChangeSizes(this.Width, this.Height);
+            panel.BackColor = Color.FromArgb(0, 0, 0, 0);
         }
 
         private void UserControl1_SizeChanged(object sender, EventArgs e)
