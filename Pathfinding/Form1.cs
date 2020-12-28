@@ -16,7 +16,8 @@ namespace Pathfinding
         //public Node.NodeControl[,] nodeInArea;
         public Label[,] nodeInArea;
 
-        private int areaSize = 20;
+        public int areaSize = 20;
+
         private int width = 0;
         private int height = 0;
 
@@ -191,6 +192,23 @@ namespace Pathfinding
         private void Form1_MouseUp(object sender, MouseEventArgs e)
         {
             mouseIsDown = false;
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            AStar aStar = new AStar(this);
+            List<PathNode> pathNodes = new List<PathNode>();
+
+            if (Points.startPointExist && Points.endPointExist)
+            {
+                Thread pathFinding = new Thread(() => pathNodes = aStar.FindPath());
+                pathFinding.Start();
+
+                /*Thread pathFinding = new Thread(() => aStarAlg.FindPath(Points.startPoint, Points.endPoint, this));
+                pathFinding.Start();*/
+
+                //aStarAlgorithm.FingPath(Points.startPoint, Points.endPoint, this);
+            }
         }
     }
 }
