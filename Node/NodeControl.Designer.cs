@@ -1,6 +1,6 @@
 ﻿namespace Node
 {
-    partial class UserControl1
+    partial class NodeControl
     {
         /// <summary>
         /// Vyžaduje se proměnná návrháře.

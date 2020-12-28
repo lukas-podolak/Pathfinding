@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Node
 {
-    public partial class UserControl1: UserControl
+    public partial class NodeControl: UserControl
     {
-        public UserControl1()
+        public NodeControl()
         {
             InitializeComponent();
 
@@ -26,7 +26,7 @@ namespace Node
 
         private void ChangeSizes(int width, int height)
         {
-            if (width >= 50 && height >= 50)
+            if (width >= 50 || height >= 50)
             {
                 lblG.Visible = true;
                 lblG.Dock = DockStyle.Top;
@@ -42,7 +42,7 @@ namespace Node
                 lblF.Dock = DockStyle.Fill;
                 lblF.Font = new Font("Century Gothic", height / 2 / 1.5f, FontStyle.Bold);
             }
-            else if (width < 50 && height < 50)
+            else if (width < 50 || height < 50)
             {
                 lblG.Visible = false;
                 lblH.Visible = false;
@@ -51,7 +51,7 @@ namespace Node
                 lblF.Dock = DockStyle.Fill;
                 lblF.Font = new Font("Century Gothic", height / 1.5f, FontStyle.Bold);
             }
-            else if (width <= 15 && height <= 15)
+            else if (width <= 15 || height <= 15)
             {
                 lblF.Visible = false;
             }
