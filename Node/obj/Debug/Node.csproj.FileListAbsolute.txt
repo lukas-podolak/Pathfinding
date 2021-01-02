@@ -1,9 +1,8 @@
 C:\Users\lpmic\Documents\Projects\C#\Pathfinding\Node\bin\Debug\Node.dll
 C:\Users\lpmic\Documents\Projects\C#\Pathfinding\Node\bin\Debug\Node.pdb
-C:\Users\lpmic\Documents\Projects\C#\Pathfinding\Node\obj\Debug\Node.csprojAssemblyReference.cache
+C:\Users\lpmic\Documents\Projects\C#\Pathfinding\Node\obj\Debug\Node.NodeControl.resources
+C:\Users\lpmic\Documents\Projects\C#\Pathfinding\Node\obj\Debug\Node.Properties.Resources.resources
 C:\Users\lpmic\Documents\Projects\C#\Pathfinding\Node\obj\Debug\Node.csproj.GenerateResource.cache
 C:\Users\lpmic\Documents\Projects\C#\Pathfinding\Node\obj\Debug\Node.csproj.CoreCompileInputs.cache
 C:\Users\lpmic\Documents\Projects\C#\Pathfinding\Node\obj\Debug\Node.dll
 C:\Users\lpmic\Documents\Projects\C#\Pathfinding\Node\obj\Debug\Node.pdb
-C:\Users\lpmic\Documents\Projects\C#\Pathfinding\Node\obj\Debug\Node.NodeControl.resources
-C:\Users\lpmic\Documents\Projects\C#\Pathfinding\Node\obj\Debug\Node.Properties.Resources.resources

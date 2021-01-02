@@ -20,7 +20,6 @@ namespace Node
             InitializeComponent();
 
             ChangeSizes(this.Width, this.Height);
-            panel.BackColor = Color.FromArgb(0, 0, 0, 0);
         }
 
         private void UserControl1_SizeChanged(object sender, EventArgs e)

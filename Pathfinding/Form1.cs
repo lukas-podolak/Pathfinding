@@ -48,6 +48,8 @@ namespace Pathfinding
                     nodeInArea[x, y].Top = (y * (height / size + 1)) + 1;
                     nodeInArea[x, y].Left = (x * (width / size + 1)) + 1;
                     nodeInArea[x, y].BackColor = Color.White;
+                    nodeInArea[x, y].Font = new Font(this.Font.FontFamily, (float)((height / size) / 2), FontStyle.Bold);
+                    nodeInArea[x, y].TextAlign = ContentAlignment.MiddleCenter;
                     /*nodeInArea[x, y].lblF.Text = "";
                     nodeInArea[x, y].lblG.Text = "";
                     nodeInArea[x, y].lblH.Text = "";
@@ -69,7 +71,6 @@ namespace Pathfinding
         }
 
         bool mouseIsDown = false;
-        float koeficient = 0.6f;
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -84,7 +85,7 @@ namespace Pathfinding
             {
                 if (e.Button == MouseButtons.Left)
                 {
-                    if (!Points.startPointExist)
+                    if (Points.startPointExist == false)
                     {
                         nodeInArea[x, y].BackColor = Color.LightBlue;
                         nodeInArea[x, y].Text = "S";
@@ -93,7 +94,7 @@ namespace Pathfinding
                         mouseIsDown = false;
                         Console.WriteLine("X=" + x + " Y=" + y + " is start.");
                     }
-                    else if (!Points.endPointExist)
+                    else if (Points.endPointExist == false && Points.startPointExist == true)
                     {
                         nodeInArea[x, y].BackColor = Color.LightBlue;
                         nodeInArea[x, y].Text = "E";
@@ -141,9 +142,6 @@ namespace Pathfinding
         {
             if (mouseIsDown == true)
             {
-                //int y = (int)(e.Y / (areaSize * koeficient));
-                //int x = (int)(e.X / (areaSize * koeficient));
-
                 int x = (e.X - 1 + (sender as Label).Left) / (width / areaSize + 1);
                 int y = (e.Y - 1 + (sender as Label).Top) / (height / areaSize + 1);
 
