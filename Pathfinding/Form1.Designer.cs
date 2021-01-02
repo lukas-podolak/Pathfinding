@@ -62,6 +62,7 @@ namespace Pathfinding
             this.ClientSize = new System.Drawing.Size(784, 761);
             this.Controls.Add(this.groupBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(800, 800);
             this.Name = "Form1";
             this.Text = "Pathfinding";
             this.groupBox.ResumeLayout(false);

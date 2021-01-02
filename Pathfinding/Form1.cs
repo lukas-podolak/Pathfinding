@@ -94,7 +94,7 @@ namespace Pathfinding
                         mouseIsDown = false;
                         Console.WriteLine("X=" + x + " Y=" + y + " is start.");
                     }
-                    else if (Points.endPointExist == false && Points.startPointExist == true)
+                    else if (Points.endPointExist == false && (Points.startPoint != new Point(x, y)))
                     {
                         nodeInArea[x, y].BackColor = Color.LightBlue;
                         nodeInArea[x, y].Text = "E";
