@@ -85,6 +85,7 @@ namespace Pathfinding
                 currentNode = currentNode.parentPathNode;
             }
 
+            form1.nodeInArea[currentNode.location.X, currentNode.location.Y].BackColor = Color.Magenta;
             path.Reverse();
             return path;
         }
