@@ -21,6 +21,12 @@ namespace Pathfinding
             this.location = location;
         }
 
+        public PathNode(Point location, int gCost)
+        {
+            this.location = location;
+            this.gCost = gCost;
+        }
+
         public void CalculateFCost()
         {
             fCost = gCost + hCost;
