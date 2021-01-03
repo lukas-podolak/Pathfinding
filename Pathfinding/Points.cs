@@ -14,5 +14,11 @@ namespace Pathfinding
 
         public static bool endPointExist = false;
         public static Point endPoint;
+
+        public static void Clear()
+        {
+            startPointExist = false;
+            endPointExist = false;
+        }
     }
 }

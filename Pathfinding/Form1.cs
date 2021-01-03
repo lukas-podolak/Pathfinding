@@ -16,7 +16,7 @@ namespace Pathfinding
         //public Node.NodeControl[,] nodeInArea;
         public Label[,] nodeInArea;
 
-        public int areaSize = 20;
+        public int areaSize = 10;
 
         private int width = 0;
         private int height = 0;
@@ -207,6 +207,32 @@ namespace Pathfinding
 
                 //aStarAlgorithm.FingPath(Points.startPoint, Points.endPoint, this);
             }
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            Points.Clear();
+        }
+
+        private void btnRebuild_Click(object sender, EventArgs e)
+        {
+            Thread treadRebuild = new Thread(() => trRebuild());
+            treadRebuild.Start();
+        }
+
+        private void trRebuild()
+        {
+            BeginInvoke(new Action(() =>
+            {           
+                for (int ix = this.Controls.Count - 1; ix >= 0; ix--)
+                {
+                    if (this.Controls[ix] is Label) this.Controls[ix].Dispose();
+                }
+            }));
+
+            Points.Clear();
+            areaSize = (int)nudSize.Value;
+            BeginInvoke(new Action(() => GenerateArea(areaSize)));
         }
     }
 }
