@@ -48,7 +48,9 @@ namespace Pathfinding
                 }
 
                 openList.Remove(currentNode);
-                //openListFCost.Remove(currentNode.fCost);
+                //openList.Clear();
+                if (openList.Count > 5000)
+                    openList.RemoveRange(0, openList.Count/2);
                 closedList.Add(currentNode);
                 form1.nodeInArea[currentNode.location.X, currentNode.location.Y].BackColor = Color.Red;
 
@@ -71,11 +73,11 @@ namespace Pathfinding
                         if (!openList.Contains(neighbourNode))
                         {
                             openList.Add(neighbourNode);
-                            //openListFCost.Add(neighbourNode.fCost);
                             form1.nodeInArea[neighbourNode.location.X, neighbourNode.location.Y].BackColor = Color.Green;
                         }
                     }
                 }
+                //openList.Sort((x, y) => x.fCost.CompareTo(y.fCost));
             }
 
             return null;

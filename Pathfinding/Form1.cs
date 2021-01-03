@@ -194,6 +194,8 @@ namespace Pathfinding
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            btnStart.Enabled = false;
+
             AStar aStar = new AStar(this);
             List<PathNode> pathNodes = new List<PathNode>();
 
@@ -201,38 +203,42 @@ namespace Pathfinding
             {
                 Thread pathFinding = new Thread(() => pathNodes = aStar.FindPath());
                 pathFinding.Start();
-
-                /*Thread pathFinding = new Thread(() => aStarAlg.FindPath(Points.startPoint, Points.endPoint, this));
-                pathFinding.Start();*/
-
-                //aStarAlgorithm.FingPath(Points.startPoint, Points.endPoint, this);
             }
         }
 
         private void btnReset_Click(object sender, EventArgs e)
         {
             Points.Clear();
+
+            for (int x = 0; x < areaSize; x++)
+            {
+                for (int y = 0; y < areaSize; y++)
+                {
+                    nodeInArea[x, y].BackColor = Color.White;
+                    nodeInArea[x, y].Text = "";
+                }
+            }
+
+            btnStart.Enabled = true;
         }
 
         private void btnRebuild_Click(object sender, EventArgs e)
         {
-            Thread treadRebuild = new Thread(() => trRebuild());
-            treadRebuild.Start();
-        }
-
-        private void trRebuild()
-        {
-            BeginInvoke(new Action(() =>
-            {           
-                for (int ix = this.Controls.Count - 1; ix >= 0; ix--)
+            Thread treadRebuild = new Thread(() => {
+                BeginInvoke(new Action(() =>
                 {
-                    if (this.Controls[ix] is Label) this.Controls[ix].Dispose();
-                }
-            }));
+                    for (int ix = this.Controls.Count - 1; ix >= 0; ix--)
+                    {
+                        if (this.Controls[ix] is Label) this.Controls[ix].Dispose();
+                    }
+                }));
 
-            Points.Clear();
-            areaSize = (int)nudSize.Value;
-            BeginInvoke(new Action(() => GenerateArea(areaSize)));
+                Points.Clear();
+                areaSize = (int)nudSize.Value;
+                BeginInvoke(new Action(() => GenerateArea(areaSize)));
+            });
+            treadRebuild.Start();
+            btnStart.Enabled = true;
         }
     }
 }
