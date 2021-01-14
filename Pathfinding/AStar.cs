@@ -49,8 +49,8 @@ namespace Pathfinding
 
                 openList.Remove(currentNode);
                 //openList.Clear();
-                if (openList.Count > 5000)
-                    openList.RemoveRange(0, openList.Count/2);
+                //if (openList.Count > 5000)
+                //   openList.RemoveRange(0, openList.Count/2);
                 closedList.Add(currentNode);
                 form1.nodeInArea[currentNode.location.X, currentNode.location.Y].BackColor = Color.Red;
 
