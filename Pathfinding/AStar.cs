@@ -104,7 +104,7 @@ namespace Pathfinding
                 {
                     form1.lblRunTime.Text = form1.stopwatch.Elapsed.ToString();
                 });
-
+            MessageBox.Show("No possible path found.", "Pathfinding - A*", MessageBoxButtons.OK, MessageBoxIcon.Information);
             return null;
         }
 

@@ -70,6 +70,7 @@ namespace Pathfinding
             // 
             // chbShowAnimation
             // 
+            this.chbShowAnimation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chbShowAnimation.AutoSize = true;
             this.chbShowAnimation.Location = new System.Drawing.Point(12, 48);
             this.chbShowAnimation.Name = "chbShowAnimation";
@@ -80,6 +81,7 @@ namespace Pathfinding
             // 
             // btnGenerateMaze
             // 
+            this.btnGenerateMaze.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnGenerateMaze.Location = new System.Drawing.Point(12, 713);
             this.btnGenerateMaze.Name = "btnGenerateMaze";
             this.btnGenerateMaze.Size = new System.Drawing.Size(156, 23);
@@ -90,6 +92,7 @@ namespace Pathfinding
             // 
             // btnClear
             // 
+            this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClear.Location = new System.Drawing.Point(12, 742);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(156, 23);
@@ -100,6 +103,7 @@ namespace Pathfinding
             // 
             // btnRebuild
             // 
+            this.btnRebuild.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRebuild.Location = new System.Drawing.Point(12, 826);
             this.btnRebuild.Name = "btnRebuild";
             this.btnRebuild.Size = new System.Drawing.Size(156, 23);
@@ -110,6 +114,7 @@ namespace Pathfinding
             // 
             // btnReset
             // 
+            this.btnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnReset.Location = new System.Drawing.Point(12, 771);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(156, 23);
@@ -120,6 +125,7 @@ namespace Pathfinding
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(9, 802);
             this.label1.Name = "label1";
@@ -129,6 +135,7 @@ namespace Pathfinding
             // 
             // nudSize
             // 
+            this.nudSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.nudSize.Location = new System.Drawing.Point(42, 800);
             this.nudSize.Maximum = new decimal(new int[] {
             50,
@@ -151,6 +158,7 @@ namespace Pathfinding
             // 
             // btnStart
             // 
+            this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnStart.Location = new System.Drawing.Point(12, 19);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(156, 23);
@@ -161,6 +169,7 @@ namespace Pathfinding
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.lblRunTime);
             this.groupBox1.Location = new System.Drawing.Point(12, 71);
             this.groupBox1.Name = "groupBox1";
