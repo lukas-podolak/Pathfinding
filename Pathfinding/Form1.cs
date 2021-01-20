@@ -18,15 +18,20 @@ namespace Pathfinding
 
         public int areaSize = 10;
 
-        private int width = 0;
-        private int height = 0;
+        private int width = 800;
+        private int height = 800;
 
         public Form1()
         {
             InitializeComponent();
 
-            width = this.ClientSize.Width - areaSize;
-            height = this.ClientSize.Height - areaSize;
+            //width = this.ClientSize.Width - areaSize;
+            //height = this.ClientSize.Height - areaSize;
+
+            chbShowAnimation.Checked = true;
+            chbShowAnimation.Enabled = false;
+
+            btnGenerateMaze.Enabled = false;
 
             GenerateArea(areaSize);
         }
@@ -201,7 +206,11 @@ namespace Pathfinding
 
             if (Points.startPointExist && Points.endPointExist)
             {
-                Thread pathFinding = new Thread(() => pathNodes = aStar.FindPath());
+                Thread pathFinding;
+                if (chbShowAnimation.Checked)
+                    pathFinding = new Thread(() => pathNodes = aStar.FindPath(true));
+                else
+                    pathFinding = new Thread(() => pathNodes = aStar.FindPath(false));
                 pathFinding.Start();
             }
         }
@@ -239,6 +248,29 @@ namespace Pathfinding
             });
             treadRebuild.Start();
             btnStart.Enabled = true;
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            Points.Clear();
+
+            for (int x = 0; x < areaSize; x++)
+            {
+                for (int y = 0; y < areaSize; y++)
+                {
+                    if (nodeInArea[x, y].BackColor != Color.Black)
+                    {
+                        nodeInArea[x, y].BackColor = Color.White;
+                        nodeInArea[x, y].Text = "";
+                    }
+                }
+            }
+
+            btnStart.Enabled = true;
+        }
+
+        private void btnGenerateMaze_Click(object sender, EventArgs e)
+        {
         }
     }
 }

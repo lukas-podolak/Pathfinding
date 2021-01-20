@@ -54,14 +54,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Pathfinding.exe" size="388576">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Pathfinding.exe" size="389600">
       <assemblyIdentity name="Pathfinding" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>1MSgnBYzG5NwVbpdQ8eVbvKKsCvFnhhWX9dAVPvvECM=</dsig:DigestValue>
+        <dsig:DigestValue>OTB7MYWZ2fvi5AepQyzxPvR95FZyCgYFmYvPI9epvcg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

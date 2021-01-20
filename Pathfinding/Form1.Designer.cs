@@ -31,34 +31,62 @@ namespace Pathfinding
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox = new System.Windows.Forms.GroupBox();
+            this.btnGenerateMaze = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
             this.btnRebuild = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.nudSize = new System.Windows.Forms.NumericUpDown();
             this.btnStart = new System.Windows.Forms.Button();
+            this.chbShowAnimation = new System.Windows.Forms.CheckBox();
             this.groupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSize)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox
             // 
+            this.groupBox.BackColor = System.Drawing.Color.White;
+            this.groupBox.Controls.Add(this.chbShowAnimation);
+            this.groupBox.Controls.Add(this.btnGenerateMaze);
+            this.groupBox.Controls.Add(this.btnClear);
             this.groupBox.Controls.Add(this.btnRebuild);
             this.groupBox.Controls.Add(this.btnReset);
             this.groupBox.Controls.Add(this.label1);
             this.groupBox.Controls.Add(this.nudSize);
             this.groupBox.Controls.Add(this.btnStart);
-            this.groupBox.Location = new System.Drawing.Point(606, 643);
+            this.groupBox.Dock = System.Windows.Forms.DockStyle.Right;
+            this.groupBox.Location = new System.Drawing.Point(854, 0);
             this.groupBox.Name = "groupBox";
-            this.groupBox.Size = new System.Drawing.Size(166, 106);
+            this.groupBox.Size = new System.Drawing.Size(180, 861);
             this.groupBox.TabIndex = 0;
             this.groupBox.TabStop = false;
             this.groupBox.Text = "Settings";
             // 
+            // btnGenerateMaze
+            // 
+            this.btnGenerateMaze.Location = new System.Drawing.Point(12, 713);
+            this.btnGenerateMaze.Name = "btnGenerateMaze";
+            this.btnGenerateMaze.Size = new System.Drawing.Size(156, 23);
+            this.btnGenerateMaze.TabIndex = 6;
+            this.btnGenerateMaze.Text = "Generate Maze";
+            this.btnGenerateMaze.UseVisualStyleBackColor = true;
+            this.btnGenerateMaze.Click += new System.EventHandler(this.btnGenerateMaze_Click);
+            // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(12, 742);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(156, 23);
+            this.btnClear.TabIndex = 5;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
             // btnRebuild
             // 
-            this.btnRebuild.Location = new System.Drawing.Point(84, 74);
+            this.btnRebuild.Location = new System.Drawing.Point(12, 826);
             this.btnRebuild.Name = "btnRebuild";
-            this.btnRebuild.Size = new System.Drawing.Size(75, 23);
+            this.btnRebuild.Size = new System.Drawing.Size(156, 23);
             this.btnRebuild.TabIndex = 4;
             this.btnRebuild.Text = "Rebuild";
             this.btnRebuild.UseVisualStyleBackColor = true;
@@ -66,9 +94,9 @@ namespace Pathfinding
             // 
             // btnReset
             // 
-            this.btnReset.Location = new System.Drawing.Point(9, 74);
+            this.btnReset.Location = new System.Drawing.Point(12, 771);
             this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(69, 23);
+            this.btnReset.Size = new System.Drawing.Size(156, 23);
             this.btnReset.TabIndex = 3;
             this.btnReset.Text = "Reset";
             this.btnReset.UseVisualStyleBackColor = true;
@@ -77,7 +105,7 @@ namespace Pathfinding
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 50);
+            this.label1.Location = new System.Drawing.Point(9, 802);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(27, 13);
             this.label1.TabIndex = 2;
@@ -85,7 +113,7 @@ namespace Pathfinding
             // 
             // nudSize
             // 
-            this.nudSize.Location = new System.Drawing.Point(39, 48);
+            this.nudSize.Location = new System.Drawing.Point(42, 800);
             this.nudSize.Maximum = new decimal(new int[] {
             50,
             0,
@@ -97,7 +125,7 @@ namespace Pathfinding
             0,
             0});
             this.nudSize.Name = "nudSize";
-            this.nudSize.Size = new System.Drawing.Size(120, 20);
+            this.nudSize.Size = new System.Drawing.Size(126, 20);
             this.nudSize.TabIndex = 1;
             this.nudSize.Value = new decimal(new int[] {
             10,
@@ -107,22 +135,32 @@ namespace Pathfinding
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(9, 19);
+            this.btnStart.Location = new System.Drawing.Point(12, 19);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(150, 23);
+            this.btnStart.Size = new System.Drawing.Size(156, 23);
             this.btnStart.TabIndex = 0;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
+            // chbShowAnimation
+            // 
+            this.chbShowAnimation.AutoSize = true;
+            this.chbShowAnimation.Location = new System.Drawing.Point(12, 48);
+            this.chbShowAnimation.Name = "chbShowAnimation";
+            this.chbShowAnimation.Size = new System.Drawing.Size(101, 17);
+            this.chbShowAnimation.TabIndex = 7;
+            this.chbShowAnimation.Text = "Show animation";
+            this.chbShowAnimation.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 761);
+            this.ClientSize = new System.Drawing.Size(1034, 861);
             this.Controls.Add(this.groupBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(800, 800);
+            this.MinimumSize = new System.Drawing.Size(1050, 900);
             this.Name = "Form1";
             this.Text = "Pathfinding";
             this.groupBox.ResumeLayout(false);
@@ -140,6 +178,9 @@ namespace Pathfinding
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown nudSize;
+        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button btnGenerateMaze;
+        private System.Windows.Forms.CheckBox chbShowAnimation;
     }
 }
 

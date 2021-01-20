@@ -22,7 +22,7 @@ namespace Pathfinding
             form1 = form;
         }
 
-        public List<PathNode> FindPath()
+        public List<PathNode> FindPath(bool showAnim)
         {
             PathNode startNode = new PathNode(Points.startPoint);
             PathNode endNode = new PathNode(Points.endPoint);
@@ -52,7 +52,8 @@ namespace Pathfinding
                 //if (openList.Count > 5000)
                 //   openList.RemoveRange(0, openList.Count/2);
                 closedList.Add(currentNode);
-                form1.nodeInArea[currentNode.location.X, currentNode.location.Y].BackColor = Color.Red;
+                if (showAnim)
+                    form1.nodeInArea[currentNode.location.X, currentNode.location.Y].BackColor = Color.Red;
 
                 foreach (PathNode neighbourNode in GetNeighbourList(currentNode))
                 {
@@ -73,7 +74,8 @@ namespace Pathfinding
                         if (!openList.Contains(neighbourNode))
                         {
                             openList.Add(neighbourNode);
-                            form1.nodeInArea[neighbourNode.location.X, neighbourNode.location.Y].BackColor = Color.Green;
+                            if (showAnim)
+                                form1.nodeInArea[neighbourNode.location.X, neighbourNode.location.Y].BackColor = Color.Green;
                         }
                     }
                 }
