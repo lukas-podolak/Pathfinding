@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,8 @@ namespace Pathfinding
     {
         //public Node.NodeControl[,] nodeInArea;
         public Label[,] nodeInArea;
+
+        public Stopwatch stopwatch = new Stopwatch();
 
         public int areaSize = 10;
 
@@ -212,6 +215,8 @@ namespace Pathfinding
                 else
                     pathFinding = new Thread(() => pathNodes = aStar.FindPath(false));
                 pathFinding.Start();
+                stopwatch.Start();
+                timer.Start();
             }
         }
 
@@ -271,6 +276,12 @@ namespace Pathfinding
 
         private void btnGenerateMaze_Click(object sender, EventArgs e)
         {
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            //TimeSpan timeSpan = TimeSpan.FromSeconds(Convert.ToInt32(stopwatch.Elapsed));
+            lblRunTime.Text = stopwatch.Elapsed.ToString();
         }
     }
 }

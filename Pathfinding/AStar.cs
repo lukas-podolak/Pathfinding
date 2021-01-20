@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Pathfinding
 {
@@ -44,6 +46,17 @@ namespace Pathfinding
                 if (currentNode.location == endNode.location)
                 {
                     endNode = currentNode;
+                    form1.stopwatch.Stop();
+                    form1.timer.Stop();
+
+                    if (!form1.lblRunTime.InvokeRequired)
+                        form1.lblRunTime.Text = form1.stopwatch.Elapsed.ToString();
+                    else
+                        form1.lblRunTime.Invoke((MethodInvoker)delegate
+                        {
+                            form1.lblRunTime.Text = form1.stopwatch.Elapsed.ToString();
+                        });
+
                     return CalcularePath(endNode);
                 }
 
@@ -81,6 +94,16 @@ namespace Pathfinding
                 }
                 //openList.Sort((x, y) => x.fCost.CompareTo(y.fCost));
             }
+            form1.stopwatch.Stop();
+            form1.timer.Stop();
+
+            if (!form1.lblRunTime.InvokeRequired)
+                form1.lblRunTime.Text = form1.stopwatch.Elapsed.ToString();
+            else
+                form1.lblRunTime.Invoke((MethodInvoker)delegate
+                {
+                    form1.lblRunTime.Text = form1.stopwatch.Elapsed.ToString();
+                });
 
             return null;
         }
