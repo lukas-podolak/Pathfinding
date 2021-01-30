@@ -19,7 +19,7 @@ namespace Pathfinding
 
         public Stopwatch stopwatch = new Stopwatch();
 
-        public int areaSize = 10;
+        public int areaSize = 15;
 
         private int width = 800;
         private int height = 800;
@@ -35,6 +35,8 @@ namespace Pathfinding
             chbShowAnimation.Enabled = false;
 
             btnGenerateMaze.Enabled = false;
+
+            nudSize.Value = areaSize;
 
             GenerateArea(areaSize);
         }
