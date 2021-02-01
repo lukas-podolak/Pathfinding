@@ -10,11 +10,14 @@ namespace Pathfinding
     public class PathNode
     {
         public Point location;
+        public Point parentNodeLocation;
         public PathNode parentPathNode = null;
 
         public int gCost = int.MaxValue;
         public int hCost;
         public int fCost;
+
+        public char tag = 'E';
 
         public PathNode(Point location)
         {
