@@ -16,6 +16,7 @@ namespace Pathfinding
     {
         //public Node.NodeControl[,] nodeInArea;
         public Label[,] nodeInArea;
+        public PathNode[,] nodeArea;
 
         public Stopwatch stopwatch = new Stopwatch();
 
@@ -46,6 +47,7 @@ namespace Pathfinding
         {
             //nodeInArea = new Node.NodeControl[size, size];
             nodeInArea = new Label[size, size];
+            nodeArea = new PathNode[size, size];
 
             for (int x = 0; x < size; x++)
             {
@@ -76,6 +78,8 @@ namespace Pathfinding
                     nodeInArea[x, y].MouseMove += Form1_MouseMove;
                     nodeInArea[x, y].MouseUp += Form1_MouseUp;
                     nodeInArea[x, y].Parent = this;
+
+                    nodeArea[x, y] = new PathNode(new Point(x, y));
                 }
             }
         }
@@ -99,6 +103,7 @@ namespace Pathfinding
                     {
                         nodeInArea[x, y].BackColor = Color.LightBlue;
                         nodeInArea[x, y].Text = "S";
+                        nodeArea[x, y].tag = 'S';
                         Points.startPointExist = true;
                         Points.startPoint = new Point(x, y);
                         mouseIsDown = false;
@@ -108,6 +113,7 @@ namespace Pathfinding
                     {
                         nodeInArea[x, y].BackColor = Color.LightBlue;
                         nodeInArea[x, y].Text = "E";
+                        nodeArea[x, y].tag = 'E';
                         Points.endPointExist = true;
                         Points.endPoint = new Point(x, y);
                         mouseIsDown = false;
@@ -116,6 +122,7 @@ namespace Pathfinding
                     else if (nodeInArea[x, y].BackColor == Color.White)
                     {
                         nodeInArea[x, y].BackColor = Color.Black;
+                        nodeArea[x, y].tag = 'B';
                     }
                 }
                 else if (e.Button == MouseButtons.Right)
@@ -124,6 +131,7 @@ namespace Pathfinding
                     {
                         nodeInArea[x, y].BackColor = Color.White;
                         nodeInArea[x, y].Text = "";
+                        nodeArea[x, y].tag = 'N';
                         Points.startPointExist = false;
                         Points.startPoint = Point.Empty;
                         Console.WriteLine("X=" + x + " Y=" + y + " is not start.");
@@ -132,6 +140,7 @@ namespace Pathfinding
                     {
                         nodeInArea[x, y].BackColor = Color.White;
                         nodeInArea[x, y].Text = "";
+                        nodeArea[x, y].tag = 'N';
                         Points.endPointExist = false;
                         Points.endPoint = Point.Empty;
                         Console.WriteLine("X=" + x + " Y=" + y + " is not end.");
@@ -139,6 +148,7 @@ namespace Pathfinding
                     else if (nodeInArea[x, y].BackColor != Color.White)
                     {
                         nodeInArea[x, y].BackColor = Color.White;
+                        nodeArea[x, y].tag = 'N';
                     }
                 }
             }
@@ -164,6 +174,7 @@ namespace Pathfinding
                         if (nodeInArea[x, y].BackColor == Color.White)
                         {
                             nodeInArea[x, y].BackColor = Color.Black;
+                            nodeArea[x, y].tag = 'B';
                         }
                     }
                     else if (e.Button == MouseButtons.Right)
@@ -172,6 +183,7 @@ namespace Pathfinding
                         {
                             nodeInArea[x, y].BackColor = Color.White;
                             nodeInArea[x, y].Text = "";
+                            nodeArea[x, y].tag = 'N';
                             Points.startPointExist = false;
                             Points.startPoint = Point.Empty;
                             Console.WriteLine("X=" + x + " Y=" + y + " is not start.");
@@ -180,6 +192,7 @@ namespace Pathfinding
                         {
                             nodeInArea[x, y].BackColor = Color.White;
                             nodeInArea[x, y].Text = "";
+                            nodeArea[x, y].tag = 'N';
                             Points.endPointExist = false;
                             Points.endPoint = Point.Empty;
                             Console.WriteLine("X=" + x + " Y=" + y + " is not end.");
@@ -187,6 +200,7 @@ namespace Pathfinding
                         else if (nodeInArea[x, y].BackColor != Color.White)
                         {
                             nodeInArea[x, y].BackColor = Color.White;
+                            nodeArea[x, y].tag = 'N';
                         }
                     }
                 }

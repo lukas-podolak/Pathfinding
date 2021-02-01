@@ -17,7 +17,7 @@ namespace Pathfinding
         public int hCost;
         public int fCost;
 
-        public char tag = 'E';
+        public char tag = 'N';
 
         public PathNode(Point location)
         {
