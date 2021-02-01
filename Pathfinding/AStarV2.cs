@@ -24,9 +24,6 @@ namespace Pathfinding
 
         public List<Point> FindPath(bool showAnim)
         {
-            //  startNode = form1.nodeArea[Points.startPoint.X, Points.startPoint.Y];
-            //  endNode = form1.nodeArea[Points.endPoint.X, Points.endPoint.Y];
-
             openList = new List<Point> { Points.startPoint };
             closedList = new List<Point>();
 
@@ -79,7 +76,8 @@ namespace Pathfinding
                     int tentativeGCost = form1.nodeArea[currentNodeLocation.X, currentNodeLocation.Y].gCost + CalculateDistanceCost(currentNodeLocation, neighbourNode);
                     if (tentativeGCost <= form1.nodeArea[neighbourNode.X, neighbourNode.Y].gCost)
                     {
-                        form1.nodeArea[neighbourNode.X, neighbourNode.Y].parentPathNode = form1.nodeArea[currentNodeLocation.X, currentNodeLocation.Y]; // Případně přidat lokaci
+                        form1.nodeArea[neighbourNode.X, neighbourNode.Y].parentPathNode = form1.nodeArea[currentNodeLocation.X, currentNodeLocation.Y]; 
+                        form1.nodeArea[neighbourNode.X, neighbourNode.Y].parentNodeLocation = currentNodeLocation; // Vze předchozího řádku s likací
                         form1.nodeArea[neighbourNode.X, neighbourNode.Y].gCost = tentativeGCost;
                         form1.nodeArea[neighbourNode.X, neighbourNode.Y].hCost = CalculateDistanceCost(neighbourNode, Points.endPoint);
                         form1.nodeArea[neighbourNode.X, neighbourNode.Y].CalculateFCost();
