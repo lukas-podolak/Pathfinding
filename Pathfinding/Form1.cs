@@ -33,7 +33,7 @@ namespace Pathfinding
             //height = this.ClientSize.Height - areaSize;
 
             chbShowAnimation.Checked = true;
-            chbShowAnimation.Enabled = false;
+            //chbShowAnimation.Enabled = false;
 
             btnGenerateMaze.Enabled = false;
 
@@ -220,8 +220,8 @@ namespace Pathfinding
         {
             btnStart.Enabled = false;
 
-            AStar aStar = new AStar(this);
-            List<PathNode> pathNodes = new List<PathNode>();
+            AStarV2 aStar = new AStarV2(this);
+            List<Point> pathNodes = new List<Point>();
 
             if (Points.startPointExist && Points.endPointExist)
             {
@@ -239,6 +239,7 @@ namespace Pathfinding
         private void btnReset_Click(object sender, EventArgs e)
         {
             Points.Clear();
+            nodeArea = new PathNode[areaSize, areaSize];
 
             for (int x = 0; x < areaSize; x++)
             {
@@ -246,6 +247,8 @@ namespace Pathfinding
                 {
                     nodeInArea[x, y].BackColor = Color.White;
                     nodeInArea[x, y].Text = "";
+
+                    nodeArea[x, y] = new PathNode(new Point(x, y));
                 }
             }
 
@@ -274,6 +277,7 @@ namespace Pathfinding
         private void btnClear_Click(object sender, EventArgs e)
         {
             Points.Clear();
+            nodeArea = new PathNode[areaSize, areaSize];
 
             for (int x = 0; x < areaSize; x++)
             {
@@ -283,6 +287,8 @@ namespace Pathfinding
                     {
                         nodeInArea[x, y].BackColor = Color.White;
                         nodeInArea[x, y].Text = "";
+
+                        nodeArea[x, y] = new PathNode(new Point(x, y));
                     }
                 }
             }
