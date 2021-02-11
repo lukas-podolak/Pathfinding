@@ -11,18 +11,19 @@ namespace Pathfinding
     {
         private Stack<Point> stonks;
         private Form1 form1;
+        private int counter = 0;
 
         public MazeGenerator(Form1 form)
         {
             form1 = form;
+            stonks = new Stack<Point>();
         }
 
         public void GenerateMaze(Point startPoint)
         {
-            stonks = new Stack<Point>();
-
             stonks.Push(form1.nodeArea[startPoint.X, startPoint.Y].location);
             form1.nodeArea[startPoint.X, startPoint.Y].generatorVisited = true;
+            counter++;
 
             List<Point> neighboursLocation = new List<Point>();
             neighboursLocation = GetNeighbours(startPoint);
@@ -30,19 +31,44 @@ namespace Pathfinding
             if (neighboursLocation.Count > 0)
             {
                 Random random = new Random();
-                GenerateMaze(neighboursLocation[random.Next(0, neighboursLocation.Count)]);
+                int rand = random.Next(0, neighboursLocation.Count);
+                Point nextHop = neighboursLocation[rand];
+                Console.WriteLine(neighboursLocation.Count + " - " + rand + " - " + nextHop);
+
+                if (nextHop.X > startPoint.X)
+                {
+                    form1.nodeArea[(nextHop.X - 1), startPoint.Y].generatorVisited = true;
+                    counter++;
+                }
+                if (nextHop.X < startPoint.X)
+                {
+                    form1.nodeArea[(nextHop.X + 1), startPoint.Y].generatorVisited = true;
+                    counter++;
+                }
+                if (nextHop.Y > startPoint.Y)
+                {
+                    form1.nodeArea[startPoint.X, (nextHop.Y - 1)].generatorVisited = true;
+                    counter++;
+                }
+                if (nextHop.Y < startPoint.Y)
+                {
+                    form1.nodeArea[startPoint.X, (nextHop.Y + 1)].generatorVisited = true;
+                    counter++;
+                }
+
+                GenerateMaze(nextHop);
             }
             else
             {
                 Point next = stonks.Pop();
             
-                if (next != startPoint)
+                if (counter >= (Math.Pow(form1.areaSize, 2)))
                 {
-                    GenerateMaze(next);
+                    ColorIt();
                 }
                 else
                 {
-                    ColorIt();
+                    GenerateMaze(next);
                 }
             }
         }
@@ -63,34 +89,35 @@ namespace Pathfinding
 
         private List<Point> GetNeighbours(Point currentLocation)
         {
+            const short JUMP = 2;
             List<Point> lis = new List<Point>();
 
-            if (currentLocation.X - 3 >= 0)
+            if (currentLocation.X - JUMP >= 0)
             {
-                if (!form1.nodeArea[currentLocation.X - 3, currentLocation.Y].generatorVisited)
+                if (!form1.nodeArea[currentLocation.X - JUMP, currentLocation.Y].generatorVisited)
                 {
-                    lis.Add(new Point(currentLocation.X - 3, currentLocation.Y));
+                    lis.Add(new Point(currentLocation.X - JUMP, currentLocation.Y));
                 }
             }
-            if (currentLocation.X + 3 < form1.areaSize)
+            if (currentLocation.X + JUMP < form1.areaSize)
             {
-                if (!form1.nodeArea[currentLocation.X + 3, currentLocation.Y].generatorVisited)
+                if (!form1.nodeArea[currentLocation.X + JUMP, currentLocation.Y].generatorVisited)
                 {
-                    lis.Add(new Point(currentLocation.X + 3, currentLocation.Y));
+                    lis.Add(new Point(currentLocation.X + JUMP, currentLocation.Y));
                 }
             }
-            if (currentLocation.Y-3 >= 0)
+            if (currentLocation.Y - JUMP >= 0)
             {
-                if (!form1.nodeArea[currentLocation.X, currentLocation.Y - 3].generatorVisited)
+                if (!form1.nodeArea[currentLocation.X, currentLocation.Y - JUMP].generatorVisited)
                 {
-                    lis.Add(new Point(currentLocation.X, currentLocation.Y - 3));
+                    lis.Add(new Point(currentLocation.X, currentLocation.Y - JUMP));
                 }
             }
-            if (currentLocation.Y + 3 < form1.areaSize)
+            if (currentLocation.Y + JUMP < form1.areaSize)
             {
-                if (!form1.nodeArea[currentLocation.X, currentLocation.Y + 3].generatorVisited)
+                if (!form1.nodeArea[currentLocation.X, currentLocation.Y + JUMP].generatorVisited)
                 {
-                    lis.Add(new Point(currentLocation.X, currentLocation.Y + 3));
+                    lis.Add(new Point(currentLocation.X, currentLocation.Y + JUMP));
                 }
             }
 
