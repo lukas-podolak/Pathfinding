@@ -35,8 +35,6 @@ namespace Pathfinding
             chbShowAnimation.Checked = true;
             //chbShowAnimation.Enabled = false;
 
-            btnGenerateMaze.Enabled = false;
-
             nudSize.Value = areaSize;
 
             GenerateArea(areaSize);
@@ -298,6 +296,8 @@ namespace Pathfinding
 
         private void btnGenerateMaze_Click(object sender, EventArgs e)
         {
+            MazeGenerator mazeGenerator = new MazeGenerator(this);
+            mazeGenerator.GenerateMaze(new Point(1, 1));
         }
 
         private void timer_Tick(object sender, EventArgs e)

@@ -22,6 +22,8 @@ namespace Pathfinding
         // S - START    E - END
         public char tag = 'N';
 
+        public bool generatorVisited = false;
+
         public PathNode(Point location)
         {
             this.location = location;

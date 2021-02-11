@@ -85,6 +85,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="MazeGenerator.cs" />
     <Compile Include="PathNode.cs" />
     <Compile Include="Points.cs" />
     <Compile Include="Program.cs" />
