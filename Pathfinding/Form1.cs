@@ -218,16 +218,17 @@ namespace Pathfinding
         {
             btnStart.Enabled = false;
 
-            AStarV2 aStar = new AStarV2(this);
+            //AStarV2 aStar = new AStarV2(this);
+            AStar aStar = new AStar(this);
             List<Point> pathNodes = new List<Point>();
 
             if (Points.startPointExist && Points.endPointExist)
             {
                 Thread pathFinding;
                 if (chbShowAnimation.Checked)
-                    pathFinding = new Thread(() => pathNodes = aStar.FindPath(true));
+                    pathFinding = new Thread(() => /*pathNodes =*/ aStar.FindPath(true));
                 else
-                    pathFinding = new Thread(() => pathNodes = aStar.FindPath(false));
+                    pathFinding = new Thread(() => /*pathNodes =*/ aStar.FindPath(false));
                 pathFinding.Start();
                 stopwatch.Start();
                 timer.Start();
@@ -251,6 +252,7 @@ namespace Pathfinding
             }
 
             btnStart.Enabled = true;
+            btnGenerateMaze.Enabled = true;
         }
 
         private void btnRebuild_Click(object sender, EventArgs e)
@@ -270,6 +272,7 @@ namespace Pathfinding
             });
             treadRebuild.Start();
             btnStart.Enabled = true;
+            btnGenerateMaze.Enabled = true;
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -296,8 +299,12 @@ namespace Pathfinding
 
         private void btnGenerateMaze_Click(object sender, EventArgs e)
         {
+            Thread generateMaze;
             MazeGenerator mazeGenerator = new MazeGenerator(this);
-            mazeGenerator.GenerateMaze(new Point(1, 1));
+            generateMaze = new Thread(() => mazeGenerator.GenerateMaze(new Point(1, 1)));
+            generateMaze.Start();
+
+            btnGenerateMaze.Enabled = false;
         }
 
         private void timer_Tick(object sender, EventArgs e)

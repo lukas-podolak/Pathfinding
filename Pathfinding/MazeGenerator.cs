@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Pathfinding
@@ -21,54 +22,61 @@ namespace Pathfinding
 
         public void GenerateMaze(Point startPoint)
         {
-            stonks.Push(form1.nodeArea[startPoint.X, startPoint.Y].location);
-            form1.nodeArea[startPoint.X, startPoint.Y].generatorVisited = true;
-            counter++;
-
             List<Point> neighboursLocation = new List<Point>();
             neighboursLocation = GetNeighbours(startPoint);
             
             if (neighboursLocation.Count > 0)
             {
-                Random random = new Random();
+                Thread.Sleep(1);
+                Random random = new Random(DateTime.Now.Millisecond);
                 int rand = random.Next(0, neighboursLocation.Count);
                 Point nextHop = neighboursLocation[rand];
-                Console.WriteLine(neighboursLocation.Count + " - " + rand + " - " + nextHop);
 
                 if (nextHop.X > startPoint.X)
                 {
-                    form1.nodeArea[(nextHop.X - 1), startPoint.Y].generatorVisited = true;
+                    form1.nodeArea[(nextHop.X - 1), nextHop.Y].generatorVisited = true;
+                    form1.nodeInArea[(nextHop.X - 1), nextHop.Y].BackColor = Color.Orange;
                     counter++;
                 }
                 if (nextHop.X < startPoint.X)
                 {
-                    form1.nodeArea[(nextHop.X + 1), startPoint.Y].generatorVisited = true;
+                    form1.nodeArea[(nextHop.X + 1), nextHop.Y].generatorVisited = true;
+                    form1.nodeInArea[(nextHop.X + 1), nextHop.Y].BackColor = Color.Orange;
                     counter++;
                 }
                 if (nextHop.Y > startPoint.Y)
                 {
-                    form1.nodeArea[startPoint.X, (nextHop.Y - 1)].generatorVisited = true;
+                    form1.nodeArea[nextHop.X, (nextHop.Y - 1)].generatorVisited = true;
+                    form1.nodeInArea[nextHop.X, (nextHop.Y - 1)].BackColor = Color.Orange;
                     counter++;
                 }
                 if (nextHop.Y < startPoint.Y)
                 {
-                    form1.nodeArea[startPoint.X, (nextHop.Y + 1)].generatorVisited = true;
+                    form1.nodeArea[nextHop.X, (nextHop.Y + 1)].generatorVisited = true;
+                    form1.nodeInArea[nextHop.X, (nextHop.Y + 1)].BackColor = Color.Orange;
                     counter++;
                 }
 
+                stonks.Push(form1.nodeArea[nextHop.X, nextHop.Y].location);
+                form1.nodeArea[nextHop.X, nextHop.Y].generatorVisited = true;
+                form1.nodeInArea[nextHop.X, nextHop.Y].BackColor = Color.Orange;
+                counter++;
+
+                Console.WriteLine(neighboursLocation.Count + " - " + rand + " - " + nextHop + " - " + counter);
                 GenerateMaze(nextHop);
             }
             else
             {
-                Point next = stonks.Pop();
+                stonks.Pop();
             
-                if (counter >= (Math.Pow(form1.areaSize, 2)))
+                try
                 {
-                    ColorIt();
+                    GenerateMaze(stonks.Peek());
                 }
-                else
+                catch
                 {
-                    GenerateMaze(next);
+                    Console.WriteLine("Maze generated.");
+                    ColorIt();
                 }
             }
         }
@@ -82,6 +90,12 @@ namespace Pathfinding
                     if (!form1.nodeArea[x, y].generatorVisited)
                     {
                         form1.nodeInArea[x, y].BackColor = Color.Black;
+                        form1.nodeArea[x, y].tag = 'B';
+                    }
+                    else
+                    {
+                        form1.nodeInArea[x, y].BackColor = Color.White;
+                        form1.nodeArea[x, y].tag = 'N';
                     }
                 }
             }
