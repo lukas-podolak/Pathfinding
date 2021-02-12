@@ -19,6 +19,7 @@ namespace Pathfinding
         public PathNode[,] nodeArea;
 
         public Stopwatch stopwatch = new Stopwatch();
+        public Stopwatch stopwatch1 = new Stopwatch();
 
         public int areaSize = 15;
 
@@ -228,7 +229,7 @@ namespace Pathfinding
                 if (chbShowAnimation.Checked)
                     pathFinding = new Thread(() => /*pathNodes =*/ aStar.FindPath(true));
                 else
-                    pathFinding = new Thread(() => /*pathNodes =*/ aStar.FindPath(false));
+                    pathFinding = new Thread(() => /*pathNodes = */aStar.FindPath(false));
                 pathFinding.Start();
                 stopwatch.Start();
                 timer.Start();
@@ -301,8 +302,10 @@ namespace Pathfinding
         {
             Thread generateMaze;
             MazeGenerator mazeGenerator = new MazeGenerator(this);
-            generateMaze = new Thread(() => mazeGenerator.GenerateMaze(new Point(1, 1)));
+            generateMaze = new Thread(() => mazeGenerator.GenerateMaze(new Point(1, 1), chbShowMazeAnim.Checked));
             generateMaze.Start();
+            stopwatch1.Start();
+            timer.Start();
 
             btnGenerateMaze.Enabled = false;
         }

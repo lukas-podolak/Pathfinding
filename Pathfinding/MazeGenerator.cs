@@ -20,50 +20,66 @@ namespace Pathfinding
             stonks = new Stack<Point>();
         }
 
-        public void GenerateMaze(Point startPoint)
+        public void GenerateMaze(Point startPoint, bool anim)
         {
             List<Point> neighboursLocation = new List<Point>();
             neighboursLocation = GetNeighbours(startPoint);
             
             if (neighboursLocation.Count > 0)
             {
-                Thread.Sleep(1);
-                Random random = new Random(DateTime.Now.Millisecond);
+                if (anim)
+                    Thread.Sleep(2);
+
+                Random random;
+                try
+                {
+                    random = new Random((int)form1.stopwatch1.Elapsed.Ticks);
+                }
+                catch
+                {
+                    random = new Random(DateTime.Now.Millisecond);
+                }
                 int rand = random.Next(0, neighboursLocation.Count);
                 Point nextHop = neighboursLocation[rand];
 
                 if (nextHop.X > startPoint.X)
                 {
                     form1.nodeArea[(nextHop.X - 1), nextHop.Y].generatorVisited = true;
-                    form1.nodeInArea[(nextHop.X - 1), nextHop.Y].BackColor = Color.Orange;
+                    if (anim)
+                        form1.nodeInArea[(nextHop.X - 1), nextHop.Y].BackColor = Color.Orange;
                     counter++;
                 }
                 if (nextHop.X < startPoint.X)
                 {
                     form1.nodeArea[(nextHop.X + 1), nextHop.Y].generatorVisited = true;
-                    form1.nodeInArea[(nextHop.X + 1), nextHop.Y].BackColor = Color.Orange;
+                    if (anim)
+                        form1.nodeInArea[(nextHop.X + 1), nextHop.Y].BackColor = Color.Orange;
                     counter++;
                 }
                 if (nextHop.Y > startPoint.Y)
                 {
                     form1.nodeArea[nextHop.X, (nextHop.Y - 1)].generatorVisited = true;
-                    form1.nodeInArea[nextHop.X, (nextHop.Y - 1)].BackColor = Color.Orange;
+                    if (anim)
+                        form1.nodeInArea[nextHop.X, (nextHop.Y - 1)].BackColor = Color.Orange;
                     counter++;
                 }
                 if (nextHop.Y < startPoint.Y)
                 {
                     form1.nodeArea[nextHop.X, (nextHop.Y + 1)].generatorVisited = true;
-                    form1.nodeInArea[nextHop.X, (nextHop.Y + 1)].BackColor = Color.Orange;
+                    if (anim)
+                        form1.nodeInArea[nextHop.X, (nextHop.Y + 1)].BackColor = Color.Orange;
                     counter++;
                 }
 
                 stonks.Push(form1.nodeArea[nextHop.X, nextHop.Y].location);
+
                 form1.nodeArea[nextHop.X, nextHop.Y].generatorVisited = true;
-                form1.nodeInArea[nextHop.X, nextHop.Y].BackColor = Color.Orange;
+                if (anim)
+                    form1.nodeInArea[nextHop.X, nextHop.Y].BackColor = Color.Orange;
                 counter++;
 
                 Console.WriteLine(neighboursLocation.Count + " - " + rand + " - " + nextHop + " - " + counter);
-                GenerateMaze(nextHop);
+                GenerateMaze(nextHop, anim);
             }
             else
             {
@@ -71,12 +87,14 @@ namespace Pathfinding
             
                 try
                 {
-                    GenerateMaze(stonks.Peek());
+                    GenerateMaze(stonks.Peek(), anim);
                 }
                 catch
                 {
                     Console.WriteLine("Maze generated.");
                     ColorIt();
+                    form1.stopwatch1.Stop();
+                    form1.timer.Stop();
                 }
             }
         }

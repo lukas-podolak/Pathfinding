@@ -32,6 +32,8 @@ namespace Pathfinding
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblRunTime = new System.Windows.Forms.Label();
             this.chbShowAnimation = new System.Windows.Forms.CheckBox();
             this.btnGenerateMaze = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
@@ -40,17 +42,17 @@ namespace Pathfinding
             this.label1 = new System.Windows.Forms.Label();
             this.nudSize = new System.Windows.Forms.NumericUpDown();
             this.btnStart = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblRunTime = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.chbShowMazeAnim = new System.Windows.Forms.CheckBox();
             this.groupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSize)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSize)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox
             // 
             this.groupBox.BackColor = System.Drawing.Color.White;
+            this.groupBox.Controls.Add(this.chbShowMazeAnim);
             this.groupBox.Controls.Add(this.groupBox1);
             this.groupBox.Controls.Add(this.chbShowAnimation);
             this.groupBox.Controls.Add(this.btnGenerateMaze);
@@ -68,11 +70,32 @@ namespace Pathfinding
             this.groupBox.TabStop = false;
             this.groupBox.Text = "Settings";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.lblRunTime);
+            this.groupBox1.Location = new System.Drawing.Point(12, 71);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(156, 55);
+            this.groupBox1.TabIndex = 8;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Run Time";
+            // 
+            // lblRunTime
+            // 
+            this.lblRunTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblRunTime.Location = new System.Drawing.Point(6, 16);
+            this.lblRunTime.Name = "lblRunTime";
+            this.lblRunTime.Size = new System.Drawing.Size(144, 28);
+            this.lblRunTime.TabIndex = 0;
+            this.lblRunTime.Text = "00:00:00.0000000";
+            this.lblRunTime.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // chbShowAnimation
             // 
             this.chbShowAnimation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chbShowAnimation.AutoSize = true;
-            this.chbShowAnimation.Location = new System.Drawing.Point(12, 48);
+            this.chbShowAnimation.Location = new System.Drawing.Point(21, 48);
             this.chbShowAnimation.Name = "chbShowAnimation";
             this.chbShowAnimation.Size = new System.Drawing.Size(101, 17);
             this.chbShowAnimation.TabIndex = 7;
@@ -81,8 +104,8 @@ namespace Pathfinding
             // 
             // btnGenerateMaze
             // 
-            this.btnGenerateMaze.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGenerateMaze.Location = new System.Drawing.Point(12, 713);
+            this.btnGenerateMaze.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGenerateMaze.Location = new System.Drawing.Point(12, 132);
             this.btnGenerateMaze.Name = "btnGenerateMaze";
             this.btnGenerateMaze.Size = new System.Drawing.Size(156, 23);
             this.btnGenerateMaze.TabIndex = 6;
@@ -93,7 +116,7 @@ namespace Pathfinding
             // btnClear
             // 
             this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClear.Location = new System.Drawing.Point(12, 742);
+            this.btnClear.Location = new System.Drawing.Point(12, 797);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(156, 23);
             this.btnClear.TabIndex = 5;
@@ -103,8 +126,8 @@ namespace Pathfinding
             // 
             // btnRebuild
             // 
-            this.btnRebuild.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRebuild.Location = new System.Drawing.Point(12, 826);
+            this.btnRebuild.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRebuild.Location = new System.Drawing.Point(12, 184);
             this.btnRebuild.Name = "btnRebuild";
             this.btnRebuild.Size = new System.Drawing.Size(156, 23);
             this.btnRebuild.TabIndex = 4;
@@ -115,7 +138,7 @@ namespace Pathfinding
             // btnReset
             // 
             this.btnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReset.Location = new System.Drawing.Point(12, 771);
+            this.btnReset.Location = new System.Drawing.Point(12, 826);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(156, 23);
             this.btnReset.TabIndex = 3;
@@ -125,9 +148,9 @@ namespace Pathfinding
             // 
             // label1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 802);
+            this.label1.Location = new System.Drawing.Point(9, 215);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(27, 13);
             this.label1.TabIndex = 2;
@@ -135,8 +158,8 @@ namespace Pathfinding
             // 
             // nudSize
             // 
-            this.nudSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.nudSize.Location = new System.Drawing.Point(42, 800);
+            this.nudSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudSize.Location = new System.Drawing.Point(42, 213);
             this.nudSize.Maximum = new decimal(new int[] {
             80,
             0,
@@ -167,31 +190,21 @@ namespace Pathfinding
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.lblRunTime);
-            this.groupBox1.Location = new System.Drawing.Point(12, 71);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(156, 55);
-            this.groupBox1.TabIndex = 8;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Run Time";
-            // 
-            // lblRunTime
-            // 
-            this.lblRunTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblRunTime.Location = new System.Drawing.Point(6, 16);
-            this.lblRunTime.Name = "lblRunTime";
-            this.lblRunTime.Size = new System.Drawing.Size(144, 28);
-            this.lblRunTime.TabIndex = 0;
-            this.lblRunTime.Text = "00:00:00.0000000";
-            this.lblRunTime.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // timer
             // 
             this.timer.Interval = 1;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // chbShowMazeAnim
+            // 
+            this.chbShowMazeAnim.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chbShowMazeAnim.AutoSize = true;
+            this.chbShowMazeAnim.Location = new System.Drawing.Point(21, 161);
+            this.chbShowMazeAnim.Name = "chbShowMazeAnim";
+            this.chbShowMazeAnim.Size = new System.Drawing.Size(101, 17);
+            this.chbShowMazeAnim.TabIndex = 9;
+            this.chbShowMazeAnim.Text = "Show animation";
+            this.chbShowMazeAnim.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -205,8 +218,8 @@ namespace Pathfinding
             this.Text = "Pathfinding";
             this.groupBox.ResumeLayout(false);
             this.groupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSize)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nudSize)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -225,6 +238,7 @@ namespace Pathfinding
         private System.Windows.Forms.GroupBox groupBox1;
         public System.Windows.Forms.Timer timer;
         public System.Windows.Forms.Label lblRunTime;
+        private System.Windows.Forms.CheckBox chbShowMazeAnim;
     }
 }
 
