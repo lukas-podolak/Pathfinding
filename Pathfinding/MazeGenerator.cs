@@ -28,17 +28,13 @@ namespace Pathfinding
             if (neighboursLocation.Count > 0)
             {
                 if (anim)
-                    Thread.Sleep(2);
+                    Thread.Sleep(5);
+                else
+                    Thread.Sleep(1);
 
                 Random random;
-                try
-                {
-                    random = new Random((int)form1.stopwatch1.Elapsed.Ticks);
-                }
-                catch
-                {
                     random = new Random(DateTime.Now.Millisecond);
-                }
+
                 int rand = random.Next(0, neighboursLocation.Count);
                 Point nextHop = neighboursLocation[rand];
 

@@ -52,20 +52,20 @@ namespace Pathfinding
                             form1.lblRunTime.Text = form1.stopwatch.Elapsed.ToString();
                         });
 
-                    return CalcularePath(form1.nodeArea[Points.endPoint.X, Points.endPoint.Y]);
+                    return CalcularePath(form1.nodeArea[currentNodeLocation.X, currentNodeLocation.Y]);
                 }
 
                 // Revrite Lists
                 openList.Remove(currentNodeLocation);
                 closedList.Add(currentNodeLocation);
 
+                form1.nodeArea[currentNodeLocation.X, currentNodeLocation.Y].tag = 'C';
                 if (showAnim)
                 {
-                    form1.nodeArea[currentNodeLocation.X, currentNodeLocation.Y].tag = 'C';
                     form1.nodeInArea[currentNodeLocation.X, currentNodeLocation.Y].BackColor = Color.Red;
                 }
 
-                foreach (Point neighbourNode in GetNeighbourList(form1.nodeArea[currentNodeLocation.X, currentNodeLocation.Y]))
+                foreach (Point neighbourNode in GetNeighbourList(form1.nodeArea[currentNodeLocation.X, currentNodeLocation.Y], form1.chbAllowDiagonal.Checked))
                 {
                     if (form1.nodeArea[neighbourNode.X, neighbourNode.Y].tag == 'B')
                         continue;
@@ -76,18 +76,35 @@ namespace Pathfinding
                     int tentativeGCost = form1.nodeArea[currentNodeLocation.X, currentNodeLocation.Y].gCost + CalculateDistanceCost(currentNodeLocation, neighbourNode);
                     if (tentativeGCost <= form1.nodeArea[neighbourNode.X, neighbourNode.Y].gCost)
                     {
-                        //form1.nodeArea[neighbourNode.X, neighbourNode.Y].parentPathNode = form1.nodeArea[currentNodeLocation.X, currentNodeLocation.Y]; 
-                        form1.nodeArea[neighbourNode.X, neighbourNode.Y].parentNodeLocation = currentNodeLocation; // Vze předchozího řádku s likací
-                        form1.nodeArea[neighbourNode.X, neighbourNode.Y].gCost = tentativeGCost;
-                        form1.nodeArea[neighbourNode.X, neighbourNode.Y].hCost = CalculateDistanceCost(neighbourNode, Points.endPoint);
-                        form1.nodeArea[neighbourNode.X, neighbourNode.Y].CalculateFCost();
+                        PathNode neighbourPathNode = new PathNode(neighbourNode);
+                        //form1.nodeArea[neighbourNode.X, neighbourNode.Y].parentNodeLocation = currentNodeLocation;
+                        //form1.nodeArea[neighbourNode.X, neighbourNode.Y].gCost = tentativeGCost;
+                        //form1.nodeArea[neighbourNode.X, neighbourNode.Y].hCost = CalculateDistanceCost(neighbourNode, Points.endPoint);
+                        //form1.nodeArea[neighbourNode.X, neighbourNode.Y].CalculateFCost();
+
+                        neighbourPathNode.parentNodeLocation = currentNodeLocation;
+                        neighbourPathNode.gCost = tentativeGCost;
+                        neighbourPathNode.hCost = CalculateDistanceCost(neighbourNode, Points.endPoint);
+                        neighbourPathNode.CalculateFCost();
 
                         if (!openList.Contains(neighbourNode))
                         {
                             openList.Add(neighbourNode);
+                            form1.nodeArea[neighbourNode.X, neighbourNode.Y] = neighbourPathNode;
+                            form1.nodeArea[neighbourNode.X, neighbourNode.Y].tag = 'O';
+
                             if (showAnim)
                             {
-                                form1.nodeArea[neighbourNode.X, neighbourNode.Y].tag = 'O';
+                                form1.nodeInArea[neighbourNode.X, neighbourNode.Y].BackColor = Color.Green;
+                            }
+                        }
+                        else if (neighbourPathNode.fCost <= form1.nodeArea[neighbourNode.X, neighbourNode.Y].fCost)
+                        {
+                            form1.nodeArea[neighbourNode.X, neighbourNode.Y] = neighbourPathNode;
+                            form1.nodeArea[neighbourNode.X, neighbourNode.Y].tag = 'O';
+
+                            if (showAnim)
+                            {
                                 form1.nodeInArea[neighbourNode.X, neighbourNode.Y].BackColor = Color.Green;
                             }
                         }
@@ -112,70 +129,83 @@ namespace Pathfinding
         {
             List<Point> path = new List<Point>() { finalNode.location };
             PathNode currentNode = finalNode;
+            int length = 1;
 
             while (!currentNode.parentNodeLocation.IsEmpty)
             {
                 form1.nodeInArea[currentNode.location.X, currentNode.location.Y].BackColor = Color.Magenta;
                 path.Add(currentNode.parentNodeLocation);
                 currentNode = form1.nodeArea[currentNode.parentNodeLocation.X,currentNode.parentNodeLocation.Y];
+                length++;
             }
 
             form1.nodeInArea[currentNode.location.X, currentNode.location.Y].BackColor = Color.Magenta;
             path.Reverse();
+
+            if (!form1.lblTheLength.InvokeRequired)
+                form1.lblTheLength.Text = length.ToString();
+            else
+                form1.lblTheLength.Invoke((MethodInvoker)delegate
+                {
+                    form1.lblTheLength.Text = length.ToString();
+                });
+
             return path;
         }
 
-        private List<Point> GetNeighbourList(PathNode currentNode)
+        private List<Point> GetNeighbourList(PathNode currentNode, bool diagonalMove)
         {
             List<Point> neighbourList = new List<Point>();
+
+            int currentGCost = form1.nodeArea[currentNode.location.X, currentNode.location.Y].gCost;
 
             if (currentNode.location.X - 1 >= 0)
             {
                 // LEFT
                 neighbourList.Add(new Point(currentNode.location.X - 1, currentNode.location.Y));
-                form1.nodeArea[currentNode.location.X - 1, currentNode.location.Y].gCost = MOVE_STRAIGHT_COST + form1.nodeArea[currentNode.location.X,currentNode.location.Y].gCost;
+                form1.nodeArea[currentNode.location.X - 1, currentNode.location.Y].gCost = MOVE_STRAIGHT_COST + currentGCost;
                 // LEFT DOWN
-                if (currentNode.location.Y - 1 >= 0)
+                if (currentNode.location.Y - 1 >= 0 && diagonalMove)
                 {
                     neighbourList.Add(new Point(currentNode.location.X - 1, currentNode.location.Y - 1));
-                    form1.nodeArea[currentNode.location.X - 1, currentNode.location.Y - 1].gCost = MOVE_DIAGONAL_COST + form1.nodeArea[currentNode.location.X, currentNode.location.Y].gCost;
+                    form1.nodeArea[currentNode.location.X - 1, currentNode.location.Y - 1].gCost = MOVE_DIAGONAL_COST + currentGCost;
                 }
                 // LEFT UP
-                if (currentNode.location.Y + 1 < form1.areaSize)
+                if (currentNode.location.Y + 1 < form1.areaSize && diagonalMove)
                 {
                     neighbourList.Add(new Point(currentNode.location.X - 1, currentNode.location.Y + 1));
-                    form1.nodeArea[currentNode.location.X - 1, currentNode.location.Y + 1].gCost = MOVE_DIAGONAL_COST + form1.nodeArea[currentNode.location.X, currentNode.location.Y].gCost;
+                    form1.nodeArea[currentNode.location.X - 1, currentNode.location.Y + 1].gCost = MOVE_DIAGONAL_COST + currentGCost;
                 }
             }
             if (currentNode.location.X + 1 < form1.areaSize)
             {
                 // RIGHT
                 neighbourList.Add(new Point(currentNode.location.X + 1, currentNode.location.Y));
-                form1.nodeArea[currentNode.location.X + 1, currentNode.location.Y].gCost = MOVE_STRAIGHT_COST + form1.nodeArea[currentNode.location.X, currentNode.location.Y].gCost;
+                form1.nodeArea[currentNode.location.X + 1, currentNode.location.Y].gCost = MOVE_STRAIGHT_COST + currentGCost;
                 // RIGHT DOWN
-                if (currentNode.location.Y - 1 >= 0)
+                if (currentNode.location.Y - 1 >= 0 && diagonalMove)
                 {
                     neighbourList.Add(new Point(currentNode.location.X + 1, currentNode.location.Y - 1));
-                    form1.nodeArea[currentNode.location.X + 1, currentNode.location.Y - 1].gCost = MOVE_DIAGONAL_COST + form1.nodeArea[currentNode.location.X, currentNode.location.Y].gCost;
+                    form1.nodeArea[currentNode.location.X + 1, currentNode.location.Y - 1].gCost = MOVE_DIAGONAL_COST + currentGCost;
                 }
                 // RIGHT UP
-                if (currentNode.location.Y + 1 < form1.areaSize)
+                if (currentNode.location.Y + 1 < form1.areaSize && diagonalMove)
                 {
                     neighbourList.Add(new Point(currentNode.location.X + 1, currentNode.location.Y + 1));
-                    form1.nodeArea[currentNode.location.X + 1, currentNode.location.Y + 1].gCost = MOVE_DIAGONAL_COST + form1.nodeArea[currentNode.location.X, currentNode.location.Y].gCost;
+                    form1.nodeArea[currentNode.location.X + 1, currentNode.location.Y + 1].gCost = MOVE_DIAGONAL_COST + currentGCost;
                 }
             }
             // DOWN
             if (currentNode.location.Y - 1 >= 0)
             {
                 neighbourList.Add(new Point(currentNode.location.X, currentNode.location.Y - 1));
-                form1.nodeArea[currentNode.location.X, currentNode.location.Y - 1].gCost = MOVE_STRAIGHT_COST + form1.nodeArea[currentNode.location.X, currentNode.location.Y].gCost;
+                form1.nodeArea[currentNode.location.X, currentNode.location.Y - 1].gCost = MOVE_STRAIGHT_COST + currentGCost;
             }
             // UP
             if (currentNode.location.Y + 1 < form1.areaSize)
             {
                 neighbourList.Add(new Point(currentNode.location.X, currentNode.location.Y + 1));
-                form1.nodeArea[currentNode.location.X, currentNode.location.Y + 1].gCost = MOVE_STRAIGHT_COST + form1.nodeArea[currentNode.location.X, currentNode.location.Y].gCost;
+                form1.nodeArea[currentNode.location.X, currentNode.location.Y + 1].gCost = MOVE_STRAIGHT_COST + currentGCost;
             }
 
             return neighbourList;

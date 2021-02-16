@@ -39,5 +39,14 @@ namespace Pathfinding
         {
             fCost = gCost + hCost;
         }
+
+        public void Clear()
+        {
+            location = Point.Empty;
+            parentNodeLocation = Point.Empty;
+            gCost = int.MaxValue;
+            tag = 'N';
+            generatorVisited = false;
+        }
     }
 }

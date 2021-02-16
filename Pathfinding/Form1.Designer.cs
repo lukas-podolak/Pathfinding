@@ -32,6 +32,7 @@ namespace Pathfinding
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox = new System.Windows.Forms.GroupBox();
+            this.chbShowMazeAnim = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblRunTime = new System.Windows.Forms.Label();
             this.chbShowAnimation = new System.Windows.Forms.CheckBox();
@@ -43,7 +44,10 @@ namespace Pathfinding
             this.nudSize = new System.Windows.Forms.NumericUpDown();
             this.btnStart = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.chbShowMazeAnim = new System.Windows.Forms.CheckBox();
+            this.chbAllowDiagonal = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lblTheLength = new System.Windows.Forms.Label();
             this.groupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSize)).BeginInit();
@@ -52,6 +56,7 @@ namespace Pathfinding
             // groupBox
             // 
             this.groupBox.BackColor = System.Drawing.Color.White;
+            this.groupBox.Controls.Add(this.chbAllowDiagonal);
             this.groupBox.Controls.Add(this.chbShowMazeAnim);
             this.groupBox.Controls.Add(this.groupBox1);
             this.groupBox.Controls.Add(this.chbShowAnimation);
@@ -70,21 +75,35 @@ namespace Pathfinding
             this.groupBox.TabStop = false;
             this.groupBox.Text = "Settings";
             // 
+            // chbShowMazeAnim
+            // 
+            this.chbShowMazeAnim.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chbShowMazeAnim.AutoSize = true;
+            this.chbShowMazeAnim.Location = new System.Drawing.Point(21, 229);
+            this.chbShowMazeAnim.Name = "chbShowMazeAnim";
+            this.chbShowMazeAnim.Size = new System.Drawing.Size(101, 17);
+            this.chbShowMazeAnim.TabIndex = 9;
+            this.chbShowMazeAnim.Text = "Show animation";
+            this.chbShowMazeAnim.UseVisualStyleBackColor = true;
+            // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.lblTheLength);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.lblRunTime);
-            this.groupBox1.Location = new System.Drawing.Point(12, 71);
+            this.groupBox1.Location = new System.Drawing.Point(12, 94);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(156, 55);
+            this.groupBox1.Size = new System.Drawing.Size(156, 100);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Run Time";
+            this.groupBox1.Text = "Info";
             // 
             // lblRunTime
             // 
             this.lblRunTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblRunTime.Location = new System.Drawing.Point(6, 16);
+            this.lblRunTime.Location = new System.Drawing.Point(6, 29);
             this.lblRunTime.Name = "lblRunTime";
             this.lblRunTime.Size = new System.Drawing.Size(144, 28);
             this.lblRunTime.TabIndex = 0;
@@ -95,7 +114,7 @@ namespace Pathfinding
             // 
             this.chbShowAnimation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chbShowAnimation.AutoSize = true;
-            this.chbShowAnimation.Location = new System.Drawing.Point(21, 48);
+            this.chbShowAnimation.Location = new System.Drawing.Point(21, 71);
             this.chbShowAnimation.Name = "chbShowAnimation";
             this.chbShowAnimation.Size = new System.Drawing.Size(101, 17);
             this.chbShowAnimation.TabIndex = 7;
@@ -105,7 +124,7 @@ namespace Pathfinding
             // btnGenerateMaze
             // 
             this.btnGenerateMaze.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGenerateMaze.Location = new System.Drawing.Point(12, 132);
+            this.btnGenerateMaze.Location = new System.Drawing.Point(12, 200);
             this.btnGenerateMaze.Name = "btnGenerateMaze";
             this.btnGenerateMaze.Size = new System.Drawing.Size(156, 23);
             this.btnGenerateMaze.TabIndex = 6;
@@ -127,7 +146,7 @@ namespace Pathfinding
             // btnRebuild
             // 
             this.btnRebuild.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRebuild.Location = new System.Drawing.Point(12, 184);
+            this.btnRebuild.Location = new System.Drawing.Point(12, 252);
             this.btnRebuild.Name = "btnRebuild";
             this.btnRebuild.Size = new System.Drawing.Size(156, 23);
             this.btnRebuild.TabIndex = 4;
@@ -150,7 +169,7 @@ namespace Pathfinding
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 215);
+            this.label1.Location = new System.Drawing.Point(9, 282);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(27, 13);
             this.label1.TabIndex = 2;
@@ -159,7 +178,7 @@ namespace Pathfinding
             // nudSize
             // 
             this.nudSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.nudSize.Location = new System.Drawing.Point(42, 213);
+            this.nudSize.Location = new System.Drawing.Point(42, 281);
             this.nudSize.Maximum = new decimal(new int[] {
             80,
             0,
@@ -195,16 +214,45 @@ namespace Pathfinding
             this.timer.Interval = 1;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
-            // chbShowMazeAnim
+            // chbAllowDiagonal
             // 
-            this.chbShowMazeAnim.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.chbShowMazeAnim.AutoSize = true;
-            this.chbShowMazeAnim.Location = new System.Drawing.Point(21, 161);
-            this.chbShowMazeAnim.Name = "chbShowMazeAnim";
-            this.chbShowMazeAnim.Size = new System.Drawing.Size(101, 17);
-            this.chbShowMazeAnim.TabIndex = 9;
-            this.chbShowMazeAnim.Text = "Show animation";
-            this.chbShowMazeAnim.UseVisualStyleBackColor = true;
+            this.chbAllowDiagonal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chbAllowDiagonal.AutoSize = true;
+            this.chbAllowDiagonal.Location = new System.Drawing.Point(21, 48);
+            this.chbAllowDiagonal.Name = "chbAllowDiagonal";
+            this.chbAllowDiagonal.Size = new System.Drawing.Size(123, 17);
+            this.chbAllowDiagonal.TabIndex = 10;
+            this.chbAllowDiagonal.Text = "Allow diagonal move";
+            this.chbAllowDiagonal.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label2.Location = new System.Drawing.Point(6, 16);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(52, 13);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Run time:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 57);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(61, 13);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "The length:";
+            // 
+            // lblTheLength
+            // 
+            this.lblTheLength.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblTheLength.Location = new System.Drawing.Point(6, 70);
+            this.lblTheLength.Name = "lblTheLength";
+            this.lblTheLength.Size = new System.Drawing.Size(144, 28);
+            this.lblTheLength.TabIndex = 13;
+            this.lblTheLength.Text = "0";
+            this.lblTheLength.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Form1
             // 
@@ -219,6 +267,7 @@ namespace Pathfinding
             this.groupBox.ResumeLayout(false);
             this.groupBox.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSize)).EndInit();
             this.ResumeLayout(false);
 
@@ -239,6 +288,10 @@ namespace Pathfinding
         public System.Windows.Forms.Timer timer;
         public System.Windows.Forms.Label lblRunTime;
         private System.Windows.Forms.CheckBox chbShowMazeAnim;
+        public System.Windows.Forms.CheckBox chbAllowDiagonal;
+        private System.Windows.Forms.Label label2;
+        public System.Windows.Forms.Label lblTheLength;
+        private System.Windows.Forms.Label label3;
     }
 }
 

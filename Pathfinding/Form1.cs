@@ -30,11 +30,9 @@ namespace Pathfinding
         {
             InitializeComponent();
 
-            //width = this.ClientSize.Width - areaSize;
-            //height = this.ClientSize.Height - areaSize;
 
             chbShowAnimation.Checked = true;
-            //chbShowAnimation.Enabled = false;
+            chbAllowDiagonal.Checked = true;
 
             nudSize.Value = areaSize;
 
@@ -219,17 +217,14 @@ namespace Pathfinding
         {
             btnStart.Enabled = false;
 
-            //AStarV2 aStar = new AStarV2(this);
-            AStar aStar = new AStar(this);
+            AStarV2 aStar = new AStarV2(this);
+            //AStar aStar = new AStar(this);
             List<Point> pathNodes = new List<Point>();
 
             if (Points.startPointExist && Points.endPointExist)
             {
                 Thread pathFinding;
-                if (chbShowAnimation.Checked)
-                    pathFinding = new Thread(() => /*pathNodes =*/ aStar.FindPath(true));
-                else
-                    pathFinding = new Thread(() => /*pathNodes = */aStar.FindPath(false));
+                pathFinding = new Thread(() => pathNodes = aStar.FindPath(chbShowAnimation.Checked));
                 pathFinding.Start();
                 stopwatch.Start();
                 timer.Start();
@@ -279,7 +274,6 @@ namespace Pathfinding
         private void btnClear_Click(object sender, EventArgs e)
         {
             Points.Clear();
-            nodeArea = new PathNode[areaSize, areaSize];
 
             for (int x = 0; x < areaSize; x++)
             {
@@ -290,7 +284,7 @@ namespace Pathfinding
                         nodeInArea[x, y].BackColor = Color.White;
                         nodeInArea[x, y].Text = "";
 
-                        nodeArea[x, y] = new PathNode(new Point(x, y));
+                        nodeArea[x, y].Clear();
                     }
                 }
             }
