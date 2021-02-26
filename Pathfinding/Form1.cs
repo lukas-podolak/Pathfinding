@@ -215,19 +215,23 @@ namespace Pathfinding
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            btnStart.Enabled = false;
-
             AStarV2 aStar = new AStarV2(this);
             //AStar aStar = new AStar(this);
             List<Point> pathNodes = new List<Point>();
 
             if (Points.startPointExist && Points.endPointExist)
             {
+                btnStart.Enabled = false;
+
                 Thread pathFinding;
                 pathFinding = new Thread(() => pathNodes = aStar.FindPath(chbShowAnimation.Checked));
                 pathFinding.Start();
                 stopwatch.Start();
                 timer.Start();
+            }
+            else
+            {
+                MessageBox.Show("Please enter startpoint and endpoint correctly.", "Pathfinding", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
