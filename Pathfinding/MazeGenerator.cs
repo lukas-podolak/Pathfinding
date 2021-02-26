@@ -29,16 +29,10 @@ namespace Pathfinding
             {
                 if (anim)
                     Thread.Sleep(5);
+                else
+                    Thread.Sleep(1);
 
-                Random random;
-                try
-                {
-                    random = new Random(Guid.NewGuid().GetHashCode());
-                }
-                catch (Exception ex)
-                {
-                    random = new Random((int)DateTime.Now.Ticks);
-                }
+                Random random = new Random(Guid.NewGuid().GetHashCode());
 
                 int rand = random.Next(0, neighboursLocation.Count);
                 Point nextHop = neighboursLocation[rand];
