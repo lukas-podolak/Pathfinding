@@ -115,11 +115,15 @@ namespace Pathfinding
             form1.timer.Stop();
 
             if (!form1.lblRunTime.InvokeRequired)
+            {
                 form1.lblRunTime.Text = form1.stopwatch.Elapsed.ToString();
+                form1.btnStart.Enabled = true;
+            }
             else
                 form1.lblRunTime.Invoke((MethodInvoker)delegate
                 {
                     form1.lblRunTime.Text = form1.stopwatch.Elapsed.ToString();
+                    form1.btnStart.Enabled = true;
                 });
             MessageBox.Show("No possible path found.", "Pathfinding - A*", MessageBoxButtons.OK, MessageBoxIcon.Information);
             return null;
