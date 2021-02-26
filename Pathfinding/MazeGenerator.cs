@@ -24,16 +24,21 @@ namespace Pathfinding
         {
             List<Point> neighboursLocation = new List<Point>();
             neighboursLocation = GetNeighbours(startPoint);
-            
+
             if (neighboursLocation.Count > 0)
             {
                 if (anim)
                     Thread.Sleep(5);
-                else
-                    Thread.Sleep(1);
 
                 Random random;
-                    random = new Random(DateTime.Now.Millisecond);
+                try
+                {
+                    random = new Random(Guid.NewGuid().GetHashCode());
+                }
+                catch (Exception ex)
+                {
+                    random = new Random((int)DateTime.Now.Ticks);
+                }
 
                 int rand = random.Next(0, neighboursLocation.Count);
                 Point nextHop = neighboursLocation[rand];

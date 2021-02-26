@@ -61,6 +61,7 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="netstandard" />
     <Reference Include="Node">
       <HintPath>..\Node\bin\Debug\Node.dll</HintPath>
     </Reference>
