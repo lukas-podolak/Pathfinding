@@ -21,6 +21,9 @@ namespace Pathfinding
         public Stopwatch stopwatch = new Stopwatch();
         public Stopwatch stopwatch1 = new Stopwatch();
 
+        Thread generateMaze;
+        Thread pathFinding;
+
         public int areaSize = 15;
 
         private int width = 800;
@@ -208,7 +211,6 @@ namespace Pathfinding
             {
                 btnStart.Enabled = false;
 
-                Thread pathFinding;
                 pathFinding = new Thread(() => pathNodes = aStar.FindPath(chbShowAnimation.Checked));
                 pathFinding.Start();
                 stopwatch.Restart();
@@ -289,7 +291,6 @@ namespace Pathfinding
 
         private void btnGenerateMaze_Click(object sender, EventArgs e)
         {
-            Thread generateMaze;
             MazeGenerator mazeGenerator = new MazeGenerator(this);
             Random random = new Random(Guid.NewGuid().GetHashCode());
             Point mazeStart = new Point(random.Next(0, areaSize), random.Next(0, areaSize));
@@ -305,6 +306,19 @@ namespace Pathfinding
         private void timer_Tick(object sender, EventArgs e)
         {
             lblRunTime.Text = stopwatch.Elapsed.ToString();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Do you really want to close the program?", "Pathfinding - Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+            else
+            {
+                e.Cancel = true;
+            }
         }
     }
 }
