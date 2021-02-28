@@ -7,7 +7,6 @@ C:\Users\lpmic\Documents\Projects\C#\Pathfinding\Pathfinding\obj\Debug\Pathfindi
 C:\Users\lpmic\Documents\Projects\C#\Pathfinding\Pathfinding\obj\Debug\Pathfinding.csproj.CoreCompileInputs.cache
 C:\Users\lpmic\Documents\Projects\C#\Pathfinding\Pathfinding\obj\Debug\Pathfinding.exe
 C:\Users\lpmic\Documents\Projects\C#\Pathfinding\Pathfinding\obj\Debug\Pathfinding.pdb
-C:\Users\lpmic\Documents\Projects\C#\Pathfinding\Pathfinding\bin\Debug\Node.dll
 C:\Users\lpmic\Documents\Projects\C#\Pathfinding\Pathfinding\bin\Debug\Node.pdb
 C:\Users\lpmic\Documents\Projects\C#\Pathfinding\Pathfinding\obj\Debug\Pathfinding.csprojAssemblyReference.cache
 C:\Users\lpmic\Documents\Projects\C#\Pathfinding\Pathfinding\obj\Debug\Pathfinding.csproj.CopyComplete

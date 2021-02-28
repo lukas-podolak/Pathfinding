@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 namespace Pathfinding
@@ -110,6 +111,9 @@ namespace Pathfinding
                         }
                     }
                 }
+
+                if (showAnim)
+                    Thread.Sleep(5);
             }
             form1.stopwatch.Stop();
             form1.timer.Stop();

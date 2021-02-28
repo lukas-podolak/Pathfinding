@@ -226,6 +226,7 @@ namespace Pathfinding
                 Thread pathFinding;
                 pathFinding = new Thread(() => pathNodes = aStar.FindPath(chbShowAnimation.Checked));
                 pathFinding.Start();
+                stopwatch.Restart();
                 stopwatch.Start();
                 timer.Start();
             }
@@ -278,17 +279,22 @@ namespace Pathfinding
         private void btnClear_Click(object sender, EventArgs e)
         {
             Points.Clear();
+            nodeArea = new PathNode[areaSize, areaSize];
 
             for (int x = 0; x < areaSize; x++)
             {
                 for (int y = 0; y < areaSize; y++)
                 {
+                    nodeArea[x, y] = new PathNode(new Point(x, y));
+
                     if (nodeInArea[x, y].BackColor != Color.Black)
                     {
                         nodeInArea[x, y].BackColor = Color.White;
                         nodeInArea[x, y].Text = "";
-
-                        nodeArea[x, y].Clear();
+                    }
+                    else
+                    {
+                        nodeArea[x, y].tag = 'B';
                     }
                 }
             }
@@ -300,7 +306,10 @@ namespace Pathfinding
         {
             Thread generateMaze;
             MazeGenerator mazeGenerator = new MazeGenerator(this);
-            generateMaze = new Thread(() => mazeGenerator.GenerateMaze(new Point(1, 1), chbShowMazeAnim.Checked));
+            Random random = new Random(Guid.NewGuid().GetHashCode());
+            Point mazeStart = new Point(random.Next(0, areaSize), random.Next(0, areaSize));
+            Console.WriteLine(mazeStart.ToString());
+            generateMaze = new Thread(() => mazeGenerator.GenerateMaze(mazeStart, chbShowMazeAnim.Checked));
             generateMaze.Start();
             stopwatch1.Start();
             timer.Start();
