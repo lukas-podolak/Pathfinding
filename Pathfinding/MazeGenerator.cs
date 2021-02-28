@@ -29,8 +29,6 @@ namespace Pathfinding
             {
                 if (anim)
                     Thread.Sleep(5);
-                else
-                    Thread.Sleep(1);
 
                 Random random = new Random(Guid.NewGuid().GetHashCode());
 

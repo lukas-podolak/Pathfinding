@@ -220,12 +220,12 @@ namespace Pathfinding
             this.nudSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.nudSize.Location = new System.Drawing.Point(42, 281);
             this.nudSize.Maximum = new decimal(new int[] {
-            80,
+            57,
             0,
             0,
             0});
             this.nudSize.Minimum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
