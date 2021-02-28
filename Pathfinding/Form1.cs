@@ -42,7 +42,6 @@ namespace Pathfinding
         // Vygeneruje pole
         public void GenerateArea(int size)
         {
-            //nodeInArea = new Node.NodeControl[size, size];
             nodeInArea = new Label[size, size];
             nodeArea = new PathNode[size, size];
 
@@ -50,7 +49,6 @@ namespace Pathfinding
             {
                 for (int y = 0; y < size; y++)
                 {
-                    //nodeInArea[x, y] = new Node.NodeControl();
                     nodeInArea[x, y] = new Label();
                     nodeInArea[x, y].Width = width / size;
                     nodeInArea[x, y].Height = height / size;
@@ -59,18 +57,6 @@ namespace Pathfinding
                     nodeInArea[x, y].BackColor = Color.White;
                     nodeInArea[x, y].Font = new Font(this.Font.FontFamily, (float)((height / size) / 2), FontStyle.Bold);
                     nodeInArea[x, y].TextAlign = ContentAlignment.MiddleCenter;
-                    /*nodeInArea[x, y].lblF.Text = "";
-                    nodeInArea[x, y].lblG.Text = "";
-                    nodeInArea[x, y].lblH.Text = "";
-                    nodeInArea[x, y].lblF.MouseDown += Form1_MouseDown;
-                    nodeInArea[x, y].lblF.MouseMove += Form1_MouseMove;
-                    nodeInArea[x, y].lblF.MouseUp += Form1_MouseUp;
-                    nodeInArea[x, y].lblH.MouseDown += Form1_MouseDown;
-                    nodeInArea[x, y].lblH.MouseMove += Form1_MouseMove;
-                    nodeInArea[x, y].lblH.MouseUp += Form1_MouseUp;
-                    nodeInArea[x, y].lblG.MouseDown += Form1_MouseDown;
-                    nodeInArea[x, y].lblG.MouseMove += Form1_MouseMove;
-                    nodeInArea[x, y].lblG.MouseUp += Form1_MouseUp;*/
                     nodeInArea[x, y].MouseDown += Form1_MouseDown;
                     nodeInArea[x, y].MouseMove += Form1_MouseMove;
                     nodeInArea[x, y].MouseUp += Form1_MouseUp;
@@ -216,7 +202,6 @@ namespace Pathfinding
         private void btnStart_Click(object sender, EventArgs e)
         {
             AStarV2 aStar = new AStarV2(this);
-            //AStar aStar = new AStar(this);
             List<Point> pathNodes = new List<Point>();
 
             if (Points.startPointExist && Points.endPointExist)
@@ -319,7 +304,6 @@ namespace Pathfinding
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            //TimeSpan timeSpan = TimeSpan.FromSeconds(Convert.ToInt32(stopwatch.Elapsed));
             lblRunTime.Text = stopwatch.Elapsed.ToString();
         }
     }

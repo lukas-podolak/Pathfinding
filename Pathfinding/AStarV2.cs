@@ -78,10 +78,6 @@ namespace Pathfinding
                     if (tentativeGCost <= form1.nodeArea[neighbourNode.X, neighbourNode.Y].gCost)
                     {
                         PathNode neighbourPathNode = new PathNode(neighbourNode);
-                        //form1.nodeArea[neighbourNode.X, neighbourNode.Y].parentNodeLocation = currentNodeLocation;
-                        //form1.nodeArea[neighbourNode.X, neighbourNode.Y].gCost = tentativeGCost;
-                        //form1.nodeArea[neighbourNode.X, neighbourNode.Y].hCost = CalculateDistanceCost(neighbourNode, Points.endPoint);
-                        //form1.nodeArea[neighbourNode.X, neighbourNode.Y].CalculateFCost();
 
                         neighbourPathNode.parentNodeLocation = currentNodeLocation;
                         neighbourPathNode.gCost = tentativeGCost;
