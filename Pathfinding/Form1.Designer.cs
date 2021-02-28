@@ -55,6 +55,7 @@ namespace Pathfinding
             // 
             // groupBox
             // 
+            resources.ApplyResources(this.groupBox, "groupBox");
             this.groupBox.BackColor = System.Drawing.Color.White;
             this.groupBox.Controls.Add(this.chbAllowDiagonal);
             this.groupBox.Controls.Add(this.chbShowMazeAnim);
@@ -67,7 +68,6 @@ namespace Pathfinding
             this.groupBox.Controls.Add(this.label1);
             this.groupBox.Controls.Add(this.nudSize);
             this.groupBox.Controls.Add(this.btnStart);
-            resources.ApplyResources(this.groupBox, "groupBox");
             this.groupBox.Name = "groupBox";
             this.groupBox.TabStop = false;
             // 
