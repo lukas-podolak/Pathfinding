@@ -291,6 +291,7 @@ namespace Pathfinding
 
         private void btnGenerateMaze_Click(object sender, EventArgs e)
         {
+            btnReset.PerformClick();
             MazeGenerator mazeGenerator = new MazeGenerator(this);
             Random random = new Random(Guid.NewGuid().GetHashCode());
             Point mazeStart = new Point(random.Next(0, areaSize), random.Next(0, areaSize));
