@@ -19,6 +19,8 @@ namespace Pathfinding
         {
             startPointExist = false;
             endPointExist = false;
+            startPoint = Point.Empty;
+            endPoint = Point.Empty;
         }
     }
 }
