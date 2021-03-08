@@ -14,6 +14,8 @@ namespace Pathfinding
         private Form1 form1;
         private int counter = 0;
 
+        Random random = new Random();
+
         public MazeGenerator(Form1 form)
         {
             form1 = form;
@@ -29,8 +31,6 @@ namespace Pathfinding
             {
                 if (anim)
                     Thread.Sleep(5);
-
-                Random random = new Random(Guid.NewGuid().GetHashCode());
 
                 int rand = random.Next(0, neighboursLocation.Count);
                 Point nextHop = neighboursLocation[rand];
