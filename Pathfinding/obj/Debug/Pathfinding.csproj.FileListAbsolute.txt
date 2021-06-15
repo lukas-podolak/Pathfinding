@@ -13,3 +13,6 @@ C:\Users\lpmic\Documents\Projects\C#\Pathfinding\Pathfinding\bin\Debug\Pathfindi
 C:\Users\lpmic\Documents\Projects\C#\Pathfinding\Pathfinding\obj\Debug\Pathfinding.exe.manifest
 C:\Users\lpmic\Documents\Projects\C#\Pathfinding\Pathfinding\obj\Debug\Pathfinding.application
 C:\Users\lpmic\Documents\Projects\C#\Pathfinding\Pathfinding\obj\Debug\Pathfinding.csprojAssemblyReference.cache
+C:\Users\lpmic\Documents\Projects\C#\Pathfinding\Pathfinding\bin\Debug\en-150\Pathfinding.resources.dll
+C:\Users\lpmic\Documents\Projects\C#\Pathfinding\Pathfinding\obj\Debug\Pathfinding.Form1.en-150.resources
+C:\Users\lpmic\Documents\Projects\C#\Pathfinding\Pathfinding\obj\Debug\en-150\Pathfinding.resources.dll

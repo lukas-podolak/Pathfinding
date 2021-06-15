@@ -61,7 +61,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>PL3xxhFAokLz34nHG4fITNSECWhDY0zRICknvBWAtSc=</dsig:DigestValue>
+        <dsig:DigestValue>k/CVtkiuzSqzPqi17Mw7ZC+129x9NI7A/ELAnc1svQw=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="en-150\Pathfinding.resources.dll" size="386560">
+      <assemblyIdentity name="Pathfinding.resources" version="1.0.0.0" language="en-150" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>8luaX04MOVnIJT7VTlVfrMAdpdDi5fjMqvnXFfbyc+c=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
